@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../widgets/menu_card.dart';
 import 'hiragana_screen.dart';
-
+import 'favourite_screen.dart';
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -66,10 +66,17 @@ class HomeScreen extends StatelessWidget {
             ),
 
             MenuCard(
-              icon: Icons.person,
-              title: "Profile",
-              onTap: () {},
-            ),
+  icon: Icons.favorite,
+  title: "Favourite",
+  onTap: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => const FavouriteScreen(),
+      ),
+    );
+  },
+),
           ],
         ),
       ),
