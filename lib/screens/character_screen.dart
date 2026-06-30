@@ -215,31 +215,40 @@ void previousCharacter() {
               ],
             ),
 
-            const SizedBox(height: 30),
+           const SizedBox(height: 30),
 
-            const Text(
-              "Learning Progress",
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+const Text(
+  "Learning Progress",
+  style: TextStyle(
+    fontSize: 18,
+    fontWeight: FontWeight.bold,
+  ),
+),
 
-            const SizedBox(height: 10),
+const SizedBox(height: 10),
 
-            ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: const LinearProgressIndicator(
-                value: 0.2,
-                minHeight: 12,
-              ),
-            ),
+ClipRRect(
+  borderRadius: BorderRadius.circular(20),
+  child: LinearProgressIndicator(
+    value: (widget.currentIndex + 1) / widget.totalCharacters,
+    minHeight: 12,
+    backgroundColor: Colors.grey.shade300,
+    valueColor: const AlwaysStoppedAnimation<Color>(Colors.pink),
+  ),
+),
 
-            const SizedBox(height: 10),
+const SizedBox(height: 10),
 
-            const Text("1 / 46 Characters Learned"),
+Text(
+  "${widget.currentIndex + 1} / ${widget.totalCharacters} Characters Learned",
+  style: const TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.bold,
+  ),
+),
 
-            const SizedBox(height: 30),
+const SizedBox(height: 30),
+
           ],
         ),
       ),
