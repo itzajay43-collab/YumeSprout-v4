@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:audioplayers/audioplayers.dart';
+import '../data/hiragana_data.dart';
 class CharacterScreen extends StatefulWidget {
   final String jp;
   final String romaji;
   final String meaning;
   final String example;
+  final int currentIndex;
+  final int totalCharacters;
 
   const CharacterScreen({
     super.key,
@@ -13,6 +16,8 @@ class CharacterScreen extends StatefulWidget {
     required this.romaji,
     required this.meaning,
     required this.example,
+    required this.currentIndex,
+    required this.totalCharacters,
   });
 
   @override
@@ -50,8 +55,43 @@ class _CharacterScreenState extends State<CharacterScreen> {
   await player.play(
     AssetSource('audio/a.mp3'),
   );
-  }
+}
 
+void nextCharacter() {
+  if (widget.currentIndex < hiragana.length - 1) {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (_) => CharacterScreen(
+          jp: hiragana[widget.currentIndex + 1].jp,
+          romaji: hiragana[widget.currentIndex + 1].romaji,
+          meaning: hiragana[widget.currentIndex + 1].meaning,
+          example: hiragana[widget.currentIndex + 1].example,
+          currentIndex: widget.currentIndex + 1,
+          totalCharacters: hiragana.length,
+        ),
+      ),
+    );
+  }
+}
+
+void previousCharacter() {
+  if (widget.currentIndex > 0) {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (_) => CharacterScreen(
+          jp: hiragana[widget.currentIndex - 1].jp,
+          romaji: hiragana[widget.currentIndex - 1].romaji,
+          meaning: hiragana[widget.currentIndex - 1].meaning,
+          example: hiragana[widget.currentIndex - 1].example,
+          currentIndex: widget.currentIndex - 1,
+          totalCharacters: hiragana.length,
+        ),
+      ),
+    );
+  }
+}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -159,7 +199,7 @@ class _CharacterScreenState extends State<CharacterScreen> {
               children: [
                 Expanded(
                   child: OutlinedButton.icon(
-                    onPressed: () {},
+                    onPressed: previousCharacter,
                     icon: const Icon(Icons.arrow_back),
                     label: const Text("Previous"),
                   ),
@@ -167,7 +207,7 @@ class _CharacterScreenState extends State<CharacterScreen> {
                 const SizedBox(width: 15),
                 Expanded(
                   child: ElevatedButton.icon(
-                    onPressed: () {},
+                    onPressed: nextCharacter,
                     icon: const Icon(Icons.arrow_forward),
                     label: const Text("Next"),
                   ),

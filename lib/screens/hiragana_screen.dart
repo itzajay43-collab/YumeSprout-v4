@@ -44,11 +44,13 @@ class HiraganaScreen extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (_) => CharacterScreen(
-                      jp: item.jp,
-                      romaji: item.romaji,
-                      meaning: item.meaning,
-                      example: item.example,
-                    ),
+  jp: item.jp,
+  romaji: item.romaji,
+  meaning: item.meaning,
+  example: item.example,
+  currentIndex: index,
+  totalCharacters: hiragana.length,
+),
                   ),
                 );
               },
