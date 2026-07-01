@@ -4,6 +4,7 @@ import 'hiragana_screen.dart';
 import 'katakana_screen.dart';
 import 'favourite_screen.dart';
 import 'search_screen.dart';
+import 'quiz_screen.dart';
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -70,10 +71,17 @@ class HomeScreen extends StatelessWidget {
             ),
 
             MenuCard(
-              icon: Icons.quiz,
-              title: "Quiz",
-              onTap: () {},
-            ),
+  icon: Icons.quiz,
+  title: "Quiz",
+  onTap: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => const QuizScreen(),
+      ),
+    );
+  },
+),
 
             MenuCard(
               icon: Icons.emoji_events,
