@@ -1,3 +1,4 @@
+import 'settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'home_screen.dart';
 import 'learn_screen.dart';
@@ -18,7 +19,7 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
     HomeScreen(),
     LearnScreen(),
     QuizScreen(),
-    ProfileScreen(),
+    const SettingsScreen(),
   ];
 
   @override
