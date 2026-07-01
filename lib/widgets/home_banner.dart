@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../services/progress_service.dart';
 import '../services/streak_service.dart';
+import '../services/xp_service.dart';
 
 class HomeBanner extends StatelessWidget {
   const HomeBanner({super.key});
@@ -9,12 +10,14 @@ class HomeBanner extends StatelessWidget {
   final progress = await ProgressService().getHiraganaProgress();
   final streak = await StreakService().getStreak();
   final best = await StreakService().getBestStreak();
+  final xp = await XpService().getXP();
 
   return {
-    "progress": progress,
-    "streak": streak,
-    "best": best,
-  };
+  "progress": progress,
+  "streak": streak,
+  "best": best,
+  "xp": xp,
+};
 }
 
   @override
@@ -25,6 +28,7 @@ class HomeBanner extends StatelessWidget {
         final progress = snapshot.data?["progress"] ?? 0;
 final streak = snapshot.data?["streak"] ?? 1;
 final best = snapshot.data?["best"] ?? 1;
+final xp = snapshot.data?["xp"] ?? 0;
         return Container(
           width: double.infinity,
           padding: const EdgeInsets.all(22),
@@ -109,6 +113,16 @@ Text(
   style: const TextStyle(
     color: Colors.white70,
     fontSize: 13,
+  ),
+),
+const SizedBox(height: 8),
+
+Text(
+  "⭐ XP: $xp",
+  style: const TextStyle(
+    color: Colors.white,
+    fontWeight: FontWeight.bold,
+    fontSize: 15,
   ),
 ),
 
