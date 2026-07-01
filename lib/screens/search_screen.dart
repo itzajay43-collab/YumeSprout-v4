@@ -82,6 +82,7 @@ class _SearchScreenState extends State<SearchScreen> {
                             currentIndex: hiragana.indexOf(item),
                             totalCharacters: hiragana.length,
                             characters: hiragana,
+                            category: "hiragana",
                           ),
                         ),
                       );

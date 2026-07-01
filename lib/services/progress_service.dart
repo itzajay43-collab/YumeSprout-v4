@@ -4,17 +4,16 @@ class ProgressService {
   static const String hiraganaKey = "hiraganaProgress";
   static const String katakanaKey = "katakanaProgress";
 
-  static const String lastHiragana = "lastHiragana";
-  static const String lastKatakana = "lastKatakana";
+  static const String lastIndexKey = "lastIndex";
+  static const String categoryKey = "lastCategory";
+
+  // ==========================
+  // Hiragana Progress
+  // ==========================
 
   Future<void> saveHiraganaProgress(int value) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setInt(hiraganaKey, value);
-  }
-
-  Future<void> saveKatakanaProgress(int value) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setInt(katakanaKey, value);
   }
 
   Future<int> getHiraganaProgress() async {
@@ -22,28 +21,41 @@ class ProgressService {
     return prefs.getInt(hiraganaKey) ?? 0;
   }
 
+  // ==========================
+  // Katakana Progress
+  // ==========================
+
+  Future<void> saveKatakanaProgress(int value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt(katakanaKey, value);
+  }
+
   Future<int> getKatakanaProgress() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getInt(katakanaKey) ?? 0;
   }
 
-  Future<void> saveLastHiragana(String value) async {
+  // ==========================
+  // Continue Learning
+  // ==========================
+
+  Future<void> saveLastIndex(int index) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(lastHiragana, value);
+    await prefs.setInt(lastIndexKey, index);
   }
 
-  Future<void> saveLastKatakana(String value) async {
+  Future<int> getLastIndex() async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(lastKatakana, value);
+    return prefs.getInt(lastIndexKey) ?? 0;
   }
 
-  Future<String> getLastHiragana() async {
+  Future<void> saveCategory(String category) async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getString(lastHiragana) ?? "あ";
+    await prefs.setString(categoryKey, category);
   }
 
-  Future<String> getLastKatakana() async {
+  Future<String> getCategory() async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getString(lastKatakana) ?? "ア";
+    return prefs.getString(categoryKey) ?? "hiragana";
   }
 }

@@ -48,6 +48,7 @@ class KatakanaScreen extends StatelessWidget {
                       currentIndex: index,
                       totalCharacters: katakana.length,
                       characters: katakana,
+                      category: "katakana",
                     ),
                   ),
                 );

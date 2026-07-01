@@ -12,19 +12,21 @@ class CharacterScreen extends StatefulWidget {
   final String example;
   final int currentIndex;
   final int totalCharacters;
+  final String category;
 
   final List<CharacterModel> characters;
 
   const CharacterScreen({
-    super.key,
-    required this.jp,
-    required this.romaji,
-    required this.meaning,
-    required this.example,
-    required this.currentIndex,
-    required this.totalCharacters,
-    required this.characters,
-  });
+  super.key,
+  required this.jp,
+  required this.romaji,
+  required this.meaning,
+  required this.example,
+  required this.currentIndex,
+  required this.totalCharacters,
+  required this.characters,
+  required this.category,
+});
 
   @override
   State<CharacterScreen> createState() => _CharacterScreenState();
@@ -50,14 +52,13 @@ void initState() {
     });
   }
 Future<void> saveProgress() async {
-  if (widget.characters == hiragana) {
-    await progressService.saveHiraganaProgress(widget.currentIndex + 1);
-    await progressService.saveLastHiragana(widget.jp);
-  }
+  await progressService.saveLastIndex(widget.currentIndex);
+  await progressService.saveCategory(widget.category);
 
-  if (widget.characters == katakana) {
+  if (widget.category == "hiragana") {
+    await progressService.saveHiraganaProgress(widget.currentIndex + 1);
+  } else {
     await progressService.saveKatakanaProgress(widget.currentIndex + 1);
-    await progressService.saveLastKatakana(widget.jp);
   }
 }
   Future<void> toggleFavourite() async {
@@ -88,6 +89,7 @@ void nextCharacter() {
           currentIndex: widget.currentIndex + 1,
           totalCharacters: widget.characters.length,
           characters: widget.characters,
+          category: widget.category,
         ),
       ),
     );
@@ -107,6 +109,7 @@ void previousCharacter() {
           currentIndex: widget.currentIndex - 1,
           totalCharacters: widget.characters.length,
           characters: widget.characters,
+          category: widget.category,
         ),
       ),
     );
