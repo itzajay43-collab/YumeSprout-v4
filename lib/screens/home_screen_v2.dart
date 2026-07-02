@@ -15,6 +15,8 @@ import '../widgets/section_title.dart';
 import '../services/garden_service.dart';
 import '../widgets/garden_card.dart';
 import 'garden_screen.dart';
+import 'hiragana_screen.dart';
+import 'katakana_screen.dart';
 
 class HomeScreenV2 extends StatelessWidget {
   HomeScreenV2({super.key});
@@ -120,20 +122,34 @@ const SizedBox(height: 24),
                 Row(
                   children: [
                     LearningPathCard(
-                      emoji: "🌸",
-                      title: "Hiragana",
-                      subtitle: "46 Characters",
-                      onTap: () {},
-                    ),
+  emoji: "🌸",
+  title: "Hiragana",
+  subtitle: "46 Characters",
+  onTap: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => const HiraganaScreen(),
+      ),
+    );
+  },
+),
 
                     const SizedBox(width: 12),
 
                     LearningPathCard(
-                      emoji: "✏️",
-                      title: "Katakana",
-                      subtitle: "46 Characters",
-                      onTap: () {},
-                    ),
+  emoji: "✏️",
+  title: "Katakana",
+  subtitle: "46 Characters",
+  onTap: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => const KatakanaScreen(),
+      ),
+    );
+  },
+),
                   ],
                 ),
 
