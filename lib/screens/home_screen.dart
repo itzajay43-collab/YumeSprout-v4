@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import '../widgets/daily_goal_card.dart';
 import '../widgets/home_banner.dart';
 import '../widgets/menu_card.dart';
 import '../widgets/continue_learning_card.dart';
@@ -44,7 +44,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
             const ContinueLearningCard(),
 
-            const SizedBox(height: 20),
+const SizedBox(height: 18),
+
+const DailyGoalCard(),
+
+const SizedBox(height: 20),
 
             GridView.count(
               crossAxisCount: 2,

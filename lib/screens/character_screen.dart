@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:audioplayers/audioplayers.dart';
 import '../models/character_model.dart';
 import '../services/xp_service.dart';
+import '../services/daily_goal_service.dart';
 class CharacterScreen extends StatefulWidget {
   final String jp;
   final String romaji;
@@ -37,6 +38,7 @@ class _CharacterScreenState extends State<CharacterScreen> {
   final AudioPlayer player = AudioPlayer();
   final ProgressService progressService = ProgressService();
   final XpService xpService = XpService();
+  final DailyGoalService dailyGoalService = DailyGoalService();
   bool isFavourite = false;
 
   @override
@@ -63,6 +65,7 @@ Future<void> saveProgress() async {
     await progressService.saveKatakanaProgress(widget.currentIndex + 1);
   }
   await xpService.addXP(5);
+  await dailyGoalService.addProgress();
 }
   Future<void> toggleFavourite() async {
     final prefs = await SharedPreferences.getInstance();
