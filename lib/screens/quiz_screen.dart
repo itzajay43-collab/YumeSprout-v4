@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../services/quiz_service.dart';
 import '../services/xp_service.dart';
+import 'result_screen.dart';
 
 class QuizScreen extends StatefulWidget {
   const QuizScreen({super.key});
@@ -77,35 +78,23 @@ class _QuizScreenState extends State<QuizScreen> {
 
   await saveBestScore();
 
-  showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (_) => AlertDialog(
-          title: const Text("🎉 Quiz Finished"),
-          content: Text(
-            "Score : $score / ${questions.length}",
-            style: const TextStyle(fontSize: 20),
-          ),
-          actions: [
-            FilledButton(
-              onPressed: () {
-                Navigator.pop(context);
+  int xpEarned = (score * 10) + 20;
 
-                setState(() {
-                  questions = getRandomQuiz();
-                  currentQuestion = 0;
-                  score = 0;
-                  answered = false;
-                  selectedAnswer = "";
-                });
+if (score == questions.length) {
+  xpEarned += 50;
+}
 
-                startTimer();
-              },
-              child: const Text("Restart"),
-            ),
-          ],
-        ),
-      );
+Navigator.pushReplacement(
+  context,
+  MaterialPageRoute(
+    builder: (_) => ResultScreen(
+      score: score,
+      totalQuestions: questions.length,
+      xpEarned: xpEarned,
+      bestScore: bestScore,
+    ),
+  ),
+);
     }
   }
 
