@@ -10,12 +10,19 @@ import '../widgets/daily_mission_card.dart';
 import '../widgets/collection_hall_card.dart';
 import '../widgets/learning_path_card.dart';
 import '../widgets/japanese_word_card.dart';
+import '../services/japanese_word_service.dart';
 import '../widgets/section_title.dart';
+import '../services/garden_service.dart';
+import '../widgets/garden_card.dart';
+import 'garden_screen.dart';
 
 class HomeScreenV2 extends StatelessWidget {
   HomeScreenV2({super.key});
 
   final HomeService homeService = HomeService();
+  final JapaneseWordService wordService =
+    JapaneseWordService();
+    final GardenService gardenService = GardenService();
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +38,9 @@ class HomeScreenV2 extends StatelessWidget {
           }
 
           final data = snapshot.data!;
+          final word = wordService.getTodayWord();
+          final stage = gardenService.getCurrentStage(data.xp);
+          final nextStage = gardenService.getNextStage(data.xp);
 
           return SingleChildScrollView(
             padding: const EdgeInsets.all(AppSpacing.md),
@@ -50,6 +60,22 @@ class HomeScreenV2 extends StatelessWidget {
                 ),
 
                 const SizedBox(height: 24),
+
+GardenCard(
+  stage: stage,
+  currentXP: data.xp,
+  nextXP: nextStage?.requiredXP ?? data.xp,
+  onTap: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => const GardenScreen(),
+      ),
+    );
+  },
+),
+
+const SizedBox(height: 24),
 
                 const SectionTitle(
                   title: "Today's Journey",
@@ -150,9 +176,9 @@ class HomeScreenV2 extends StatelessWidget {
                 const SizedBox(height: 24),
 
 JapaneseWordCard(
-  japanese: "ありがとう",
-  romaji: "Arigatou",
-  meaning: "Thank You",
+  japanese: word.japanese,
+  romaji: word.romaji,
+  meaning: word.meaning,
 ),
 
 const SizedBox(height: 24),

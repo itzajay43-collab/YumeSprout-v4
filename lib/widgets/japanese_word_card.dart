@@ -44,10 +44,10 @@ class JapaneseWordCard extends StatelessWidget {
 
           const SizedBox(height: 20),
 
-          const Center(
+          Center(
             child: Text(
-              "ありがとう",
-              style: TextStyle(
+              japanese,
+              style: const TextStyle(
                 fontSize: 42,
                 fontWeight: FontWeight.bold,
               ),
@@ -56,10 +56,10 @@ class JapaneseWordCard extends StatelessWidget {
 
           const SizedBox(height: 8),
 
-          const Center(
+          Center(
             child: Text(
-              "Arigatou",
-              style: TextStyle(
+              romaji,
+              style: const TextStyle(
                 fontSize: 18,
                 color: Colors.grey,
               ),
@@ -68,10 +68,10 @@ class JapaneseWordCard extends StatelessWidget {
 
           const SizedBox(height: 6),
 
-          const Center(
+          Center(
             child: Text(
-              "Thank You",
-              style: TextStyle(
+              meaning,
+              style: const TextStyle(
                 fontSize: 18,
                 color: AppColors.primary,
                 fontWeight: FontWeight.bold,
@@ -83,14 +83,28 @@ class JapaneseWordCard extends StatelessWidget {
 
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: const [
+            children: [
 
-              Icon(Icons.volume_up_rounded),
+              IconButton(
+                onPressed: () {
+                  // TODO: Text-to-Speech
+                },
+                icon: const Icon(Icons.volume_up_rounded),
+              ),
 
-              Icon(Icons.favorite_border),
+              IconButton(
+                onPressed: () {
+                  // TODO: Save Favorite
+                },
+                icon: const Icon(Icons.favorite_border),
+              ),
 
-              Icon(Icons.copy_rounded),
-
+              IconButton(
+                onPressed: () {
+                  // TODO: Copy Word
+                },
+                icon: const Icon(Icons.copy_rounded),
+              ),
             ],
           ),
         ],
