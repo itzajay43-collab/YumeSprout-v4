@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../services/quiz_service.dart';
+import '../services/xp_service.dart';
 
 class QuizScreen extends StatefulWidget {
   const QuizScreen({super.key});
@@ -11,6 +12,7 @@ class QuizScreen extends StatefulWidget {
 }
 
 class _QuizScreenState extends State<QuizScreen> {
+  final XpService xpService = XpService();
   late List<QuizQuestion> questions;
 
   int currentQuestion = 0;
@@ -47,12 +49,14 @@ class _QuizScreenState extends State<QuizScreen> {
       selectedAnswer = answer;
 
       if (answer == questions[currentQuestion].answer) {
-        score++;
-      }
+  score++;
+
+  xpService.addXP(10);
+}
     });
   }
 
-  void nextQuestion() {
+  Future<void> nextQuestion() async {
     if (currentQuestion < questions.length - 1) {
       setState(() {
         currentQuestion++;
@@ -62,10 +66,18 @@ class _QuizScreenState extends State<QuizScreen> {
 
       startTimer();
     } else {
-      timer?.cancel();
-      saveBestScore();
 
-      showDialog(
+  timer?.cancel();
+
+  await xpService.addXP(20);
+
+  if (score == questions.length) {
+    await xpService.addXP(50);
+  }
+
+  await saveBestScore();
+
+  showDialog(
         context: context,
         barrierDismissible: false,
         builder: (_) => AlertDialog(
