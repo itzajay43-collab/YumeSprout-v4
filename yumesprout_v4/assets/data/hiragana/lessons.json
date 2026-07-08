@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "lesson": 1,
+    "unit": "Hiragana Basics",
+
+    "character": "あ",
+    "romaji": "a",
+
+    "meaning": {
+      "en": "A",
+      "hi": "अ"
+    },
+
+    "difficulty": "easy",
+    "jlpt": "N5",
+
+    "xp": 10,
+
+    "isCompleted": false,
+    "isFavorite": false,
+    "isUnlocked": true,
+
+    "audio": "assets/audio/hiragana/a.mp3",
+
+    "strokeImages": [
+      "assets/images/strokes/a_1.png",
+      "assets/images/strokes/a_2.png"
+    ],
+
+    "examples": [
+      {
+        "jp": "あさ",
+        "romaji": "asa",
+        "en": "Morning",
+        "hi": "सुबह"
+      }
+    ],
+
+    "quiz": {
+      "question": "What is the Romaji?",
+      "options": [
+        "A",
+        "I",
+        "U",
+        "E"
+      ],
+      "answer": "A"
+    }
+  },
+
+  {
+    "id": 2,
+    "lesson": 1,
+    "unit": "Hiragana Basics",
+
+    "character": "い",
+    "romaji": "i",
+
+    "meaning": {
+      "en": "I",
+      "hi": "इ"
+    },
+
+    "difficulty": "easy",
+    "jlpt": "N5",
+
+    "xp": 10,
+
+    "isCompleted": false,
+    "isFavorite": false,
+    "isUnlocked": true,
+
+    "audio": "assets/audio/hiragana/i.mp3",
+
+    "strokeImages": [
+      "assets/images/strokes/i_1.png",
+      "assets/images/strokes/i_2.png"
+    ],
+
+    "examples": [
+      {
+        "jp": "いぬ",
+        "romaji": "inu",
+        "en": "Dog",
+        "hi": "कुत्ता"
+      }
+    ],
+
+    "quiz": {
+      "question": "What is the Romaji?",
+      "options": [
+        "A",
+        "I",
+        "U",
+        "E"
+      ],
+      "answer": "I"
+    }
+  }
+]
