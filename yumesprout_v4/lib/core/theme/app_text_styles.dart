@@ -6,10 +6,9 @@ class AppTextStyles {
   AppTextStyles._();
 
   static const TextStyle display = TextStyle(
-    fontSize: 34,
+    fontSize: 40,
     fontWeight: FontWeight.bold,
     color: AppColors.textPrimary,
-    letterSpacing: -0.5,
   );
 
   static const TextStyle heading = TextStyle(
@@ -31,24 +30,18 @@ class AppTextStyles {
   );
 
   static const TextStyle body = TextStyle(
-    fontSize: 16,
+    fontSize: 15,
     color: AppColors.textPrimary,
-    height: 1.5,
-  );
-
-  static const TextStyle bodySmall = TextStyle(
-    fontSize: 14,
-    color: AppColors.textSecondary,
-  );
-
-  static const TextStyle button = TextStyle(
-    fontSize: 16,
-    fontWeight: FontWeight.bold,
-    color: Colors.white,
   );
 
   static const TextStyle caption = TextStyle(
-    fontSize: 12,
-    color: AppColors.textSecondary,
+    fontSize: 13,
+    color: AppColors.textLight,
+  );
+
+  static const TextStyle button = TextStyle(
+    fontSize: 17,
+    fontWeight: FontWeight.bold,
+    color: Colors.white,
   );
 }

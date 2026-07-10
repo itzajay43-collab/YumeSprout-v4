@@ -20,31 +20,54 @@ class AppBottomNav extends StatelessWidget {
       onDestinationSelected: onTap,
       height: 72,
       backgroundColor: Colors.white,
-      indicatorColor: AppColors.primary.withOpacity(0.12),
+      elevation: 4,
+      indicatorColor: AppColors.primary.withValues(alpha: 0.12),
+
+      labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
+
       destinations: const [
         NavigationDestination(
           icon: Icon(AppIcons.home),
-          selectedIcon: Icon(AppIcons.home),
+          selectedIcon: Icon(
+            AppIcons.home,
+            color: AppColors.primary,
+          ),
           label: "Home",
         ),
+
         NavigationDestination(
           icon: Icon(AppIcons.learn),
-          selectedIcon: Icon(AppIcons.learn),
+          selectedIcon: Icon(
+            AppIcons.learn,
+            color: AppColors.primary,
+          ),
           label: "Learn",
         ),
+
         NavigationDestination(
           icon: Icon(AppIcons.practice),
-          selectedIcon: Icon(AppIcons.practice),
+          selectedIcon: Icon(
+            AppIcons.practice,
+            color: AppColors.primary,
+          ),
           label: "Practice",
         ),
+
         NavigationDestination(
           icon: Icon(AppIcons.progress),
-          selectedIcon: Icon(AppIcons.progress),
+          selectedIcon: Icon(
+            AppIcons.progress,
+            color: AppColors.primary,
+          ),
           label: "Progress",
         ),
+
         NavigationDestination(
           icon: Icon(AppIcons.profile),
-          selectedIcon: Icon(AppIcons.profile),
+          selectedIcon: Icon(
+            AppIcons.profile,
+            color: AppColors.primary,
+          ),
           label: "Profile",
         ),
       ],

@@ -1,40 +1,85 @@
 import 'package:flutter/material.dart';
 
 import '../models/lesson_model.dart';
-import '../repositories/lesson_repository.dart';
 
 class LearnController extends ChangeNotifier {
-  final LessonRepository _repository = LessonRepository();
+  final List<LessonModel> lessons = const [
+    LessonModel(
+      id: "hiragana_1",
+      title: "Hiragana Basics",
+      subtitle: "Learn あいうえお",
+      japanese: "あ",
+      level: "N5",
+      xp: 20,
+      duration: 5,
+      progress: 0.30,
+      isLocked: false,
+      isCompleted: false,
+    ),
 
-  List<LessonModel> _lessons = [];
+    LessonModel(
+      id: "katakana_1",
+      title: "Katakana Basics",
+      subtitle: "Learn アイウエオ",
+      japanese: "ア",
+      level: "N5",
+      xp: 20,
+      duration: 5,
+      progress: 0.00,
+      isLocked: true,
+      isCompleted: false,
+    ),
 
-  bool _isLoading = true;
+    LessonModel(
+      id: "kanji_1",
+      title: "Basic Kanji",
+      subtitle: "First 10 Kanji",
+      japanese: "日",
+      level: "N5",
+      xp: 30,
+      duration: 8,
+      progress: 0.00,
+      isLocked: true,
+      isCompleted: false,
+    ),
 
-  List<LessonModel> get lessons => _lessons;
+    LessonModel(
+      id: "greetings",
+      title: "Daily Greetings",
+      subtitle: "こんにちは・おはよう",
+      japanese: "👋",
+      level: "N5",
+      xp: 15,
+      duration: 4,
+      progress: 0.80,
+      isLocked: false,
+      isCompleted: false,
+    ),
 
-  bool get isLoading => _isLoading;
+    LessonModel(
+      id: "numbers",
+      title: "Numbers",
+      subtitle: "1〜100",
+      japanese: "🔢",
+      level: "N5",
+      xp: 15,
+      duration: 4,
+      progress: 1.00,
+      isLocked: false,
+      isCompleted: true,
+    ),
 
-  Future<void> loadLessons() async {
-    try {
-      _isLoading = true;
-      notifyListeners();
-
-      _lessons = await _repository.loadLessons(
-        category: "hiragana",
-      );
-      print("Lessons Loaded: ${_lessons.length}");
-
-for (final lesson in _lessons) {
-  print("${lesson.character} - ${lesson.romaji}");
-}
-
-      print("Lessons Loaded: ${_lessons.length}");
-    } catch (e, stackTrace) {
-      print("ERROR: $e");
-      print(stackTrace);
-    } finally {
-      _isLoading = false;
-      notifyListeners();
-    }
-  }
+    LessonModel(
+      id: "conversation",
+      title: "Basic Conversation",
+      subtitle: "Simple daily talks",
+      japanese: "💬",
+      level: "N5",
+      xp: 40,
+      duration: 10,
+      progress: 0.00,
+      isLocked: true,
+      isCompleted: false,
+    ),
+  ];
 }

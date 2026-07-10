@@ -3,29 +3,28 @@ import 'package:flutter/material.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_shadows.dart';
 import '../../../core/theme/app_text_styles.dart';
-import '../../../core/widgets/app_progress.dart';
 
-import '../models/lesson_model.dart';
+import '../models/practice_item_model.dart';
 
-class LessonCard extends StatelessWidget {
-  final LessonModel lesson;
+class PracticeCard extends StatelessWidget {
+  final PracticeItemModel item;
   final VoidCallback onTap;
 
-  const LessonCard({
+  const PracticeCard({
     super.key,
-    required this.lesson,
+    required this.item,
     required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return Opacity(
-      opacity: lesson.isLocked ? 0.6 : 1,
+      opacity: item.isLocked ? 0.6 : 1,
       child: Material(
         color: Colors.transparent,
         child: InkWell(
           borderRadius: BorderRadius.circular(22),
-          onTap: lesson.isLocked ? null : onTap,
+          onTap: item.isLocked ? null : onTap,
           child: Ink(
             padding: const EdgeInsets.all(18),
             decoration: BoxDecoration(
@@ -37,35 +36,29 @@ class LessonCard extends StatelessWidget {
             ),
             child: Row(
               children: [
-                // Japanese Character
                 Container(
-                  width: 70,
-                  height: 70,
+                  width: 64,
+                  height: 64,
                   decoration: BoxDecoration(
                     color: AppColors.progressBackground,
                     borderRadius: BorderRadius.circular(18),
                   ),
                   child: Center(
                     child: Text(
-                      lesson.japanese,
-                      style: const TextStyle(
-                        fontSize: 34,
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.primary,
-                      ),
+                      item.emoji,
+                      style: const TextStyle(fontSize: 30),
                     ),
                   ),
                 ),
 
                 const SizedBox(width: 16),
 
-                // Lesson Info
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        lesson.title,
+                        item.title,
                         style: AppTextStyles.body.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
@@ -74,7 +67,7 @@ class LessonCard extends StatelessWidget {
                       const SizedBox(height: 4),
 
                       Text(
-                        lesson.subtitle,
+                        item.subtitle,
                         style: AppTextStyles.caption,
                       ),
 
@@ -83,23 +76,17 @@ class LessonCard extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            "⭐ ${lesson.xp} XP",
+                            "⭐ ${item.xp} XP",
                             style: AppTextStyles.caption,
                           ),
 
                           const SizedBox(width: 16),
 
                           Text(
-                            "⏱ ${lesson.duration} min",
+                            "⏱ ${item.duration} min",
                             style: AppTextStyles.caption,
                           ),
                         ],
-                      ),
-
-                      const SizedBox(height: 12),
-
-                      AppProgress(
-                        value: lesson.progress,
                       ),
                     ],
                   ),
@@ -108,12 +95,12 @@ class LessonCard extends StatelessWidget {
                 const SizedBox(width: 12),
 
                 Icon(
-                  lesson.isLocked
+                  item.isLocked
                       ? Icons.lock_rounded
-                      : lesson.isCompleted
-                          ? Icons.check_circle
+                      : item.isCompleted
+                          ? Icons.check_circle_rounded
                           : Icons.arrow_forward_ios_rounded,
-                  color: lesson.isCompleted
+                  color: item.isCompleted
                       ? Colors.green
                       : AppColors.primary,
                   size: 20,

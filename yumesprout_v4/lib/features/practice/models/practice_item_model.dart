@@ -1,29 +1,29 @@
-class LessonModel {
+class PracticeItemModel {
   // Basic Info
   final String id;
   final String title;
   final String subtitle;
-  final String japanese;
 
-  // Lesson Info
-  final String level;
+  // Icon
+  final String emoji;
+
+  // Reward
   final int xp;
+
+  // Estimated Time (minutes)
   final int duration;
 
-  // Progress
-  final double progress;
+  // Status
   final bool isLocked;
   final bool isCompleted;
 
-  const LessonModel({
+  const PracticeItemModel({
     required this.id,
     required this.title,
     required this.subtitle,
-    required this.japanese,
-    required this.level,
+    required this.emoji,
     required this.xp,
     required this.duration,
-    required this.progress,
     required this.isLocked,
     required this.isCompleted,
   });

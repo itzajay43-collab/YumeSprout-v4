@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_spacing.dart';
-import '../../../core/widgets/navigation/app_bottom_nav.dart';
 
-import '../widgets/continue_learning_card.dart';
+import '../controllers/home_controller.dart';
+
+import '../widgets/hero_learning_card.dart';
 import '../widgets/home_header.dart';
-import '../widgets/streak_card.dart';
+import '../widgets/quick_actions_grid.dart';
 import '../widgets/todays_word_card.dart';
 import '../widgets/weekly_challenge_card.dart';
 
@@ -15,45 +17,62 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return ChangeNotifierProvider(
+      create: (_) => HomeController(),
+      child: const _HomeView(),
+    );
+  }
+}
+
+class _HomeView extends StatelessWidget {
+  const _HomeView();
+
+  @override
+  Widget build(BuildContext context) {
+    final home = context.watch<HomeController>().home;
+
     return Scaffold(
       backgroundColor: AppColors.background,
 
       body: SafeArea(
         child: ListView(
           padding: const EdgeInsets.all(AppSpacing.md),
-          children: const [
+          children: [
+            // ================= HEADER =================
+
             HomeHeader(
-              greeting: "Konbanwa",
-              userName: "Ajay",
-              streak: 7,
+              greeting: home.greeting,
+              userName: home.userName,
+              streak: home.streak,
             ),
 
-            SizedBox(height: AppSpacing.lg),
+            const SizedBox(height: AppSpacing.lg),
 
-            StreakCard(),
+            // ================= HERO =================
 
-            SizedBox(height: AppSpacing.lg),
+            const HeroLearningCard(),
 
-            ContinueLearningCard(),
+            const SizedBox(height: AppSpacing.lg),
 
-            SizedBox(height: AppSpacing.lg),
+            // ================= QUICK ACTIONS =================
 
-            TodaysWordCard(),
+            const QuickActionsGrid(),
 
-            SizedBox(height: AppSpacing.lg),
+            const SizedBox(height: AppSpacing.lg),
 
-            WeeklyChallengeCard(),
+            // ================= TODAY'S WORD =================
 
-            SizedBox(height: AppSpacing.xxl),
+            const TodaysWordCard(),
+
+            const SizedBox(height: AppSpacing.lg),
+
+            // ================= WEEKLY CHALLENGE =================
+
+            const WeeklyChallengeCard(),
+
+            const SizedBox(height: AppSpacing.xxl),
           ],
         ),
-      ),
-
-      bottomNavigationBar: AppBottomNav(
-        currentIndex: 0,
-        onTap: (index) {
-          // TODO: Add navigation in next sprint
-        },
       ),
     );
   }

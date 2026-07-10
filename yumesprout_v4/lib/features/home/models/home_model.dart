@@ -1,31 +1,33 @@
 class HomeModel {
+  // User
+  final String greeting;
   final String userName;
+
+  // Current Lesson
+  final String currentLesson;
+  final String character;
+
+  // Lesson Progress
+  final int currentStep;
+  final int totalSteps;
+
+  // User Progress
   final int streak;
-  final int level;
   final int xp;
-  final double lessonProgress;
+  final double progress;
 
   const HomeModel({
+    required this.greeting,
     required this.userName,
-    required this.streak,
-    required this.level,
-    required this.xp,
-    required this.lessonProgress,
-  });
 
-  HomeModel copyWith({
-    String? userName,
-    int? streak,
-    int? level,
-    int? xp,
-    double? lessonProgress,
-  }) {
-    return HomeModel(
-      userName: userName ?? this.userName,
-      streak: streak ?? this.streak,
-      level: level ?? this.level,
-      xp: xp ?? this.xp,
-      lessonProgress: lessonProgress ?? this.lessonProgress,
-    );
-  }
+    required this.currentLesson,
+    required this.character,
+
+    required this.currentStep,
+    required this.totalSteps,
+
+    required this.streak,
+    required this.xp,
+    required this.progress,
+  });
 }

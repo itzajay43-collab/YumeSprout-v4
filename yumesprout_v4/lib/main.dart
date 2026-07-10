@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'core/navigation/main_navigation.dart';
 import 'core/theme/app_theme.dart';
-import 'features/home/screens/home_screen.dart';
 
 void main() {
   runApp(const YumeSproutApp());
@@ -16,7 +16,7 @@ class YumeSproutApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'YumeSprout',
       theme: AppTheme.light,
-      home: const HomeScreen(),
+      home: const MainNavigation(),
     );
   }
 }
