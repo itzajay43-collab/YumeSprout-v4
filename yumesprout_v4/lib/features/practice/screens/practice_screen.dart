@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_spacing.dart';
 
+import '../../writing/screens/writing_screen.dart';
+
 import '../controllers/practice_controller.dart';
 
 import '../widgets/daily_goal_banner.dart';
@@ -53,8 +55,22 @@ class _PracticeView extends StatelessWidget {
               child: PracticeCard(
                 item: activity,
                 onTap: () {
-                  // TODO:
-                  // Open Practice Module
+                  if (activity.title == "Hiragana Writing") {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const WritingScreen(),
+                      ),
+                    );
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(
+                          "${activity.title} is coming soon 🚀",
+                        ),
+                      ),
+                    );
+                  }
                 },
               ),
             ),
