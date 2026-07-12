@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../models/writing_character_model.dart';
 
 class WritingController extends ChangeNotifier {
+  // ================= CHARACTERS =================
+
   final List<WritingCharacterModel> characters = const [
     WritingCharacterModel(
       id: "hira_01",
@@ -15,7 +17,6 @@ class WritingController extends ChangeNotifier {
       unlocked: true,
       xp: 20,
     ),
-
     WritingCharacterModel(
       id: "hira_02",
       character: "い",
@@ -27,7 +28,6 @@ class WritingController extends ChangeNotifier {
       unlocked: true,
       xp: 20,
     ),
-
     WritingCharacterModel(
       id: "hira_03",
       character: "う",
@@ -39,7 +39,6 @@ class WritingController extends ChangeNotifier {
       unlocked: true,
       xp: 20,
     ),
-
     WritingCharacterModel(
       id: "hira_04",
       character: "え",
@@ -51,7 +50,6 @@ class WritingController extends ChangeNotifier {
       unlocked: false,
       xp: 20,
     ),
-
     WritingCharacterModel(
       id: "hira_05",
       character: "お",
@@ -64,6 +62,12 @@ class WritingController extends ChangeNotifier {
       xp: 20,
     ),
   ];
+
+  // ================= DRAWING =================
+
+  final List<Offset?> points = [];
+
+  // ================= CURRENT CHARACTER =================
 
   int currentIndex = 0;
 
@@ -79,17 +83,59 @@ class WritingController extends ChangeNotifier {
   bool get hasPrevious =>
       currentIndex > 0;
 
-  void nextCharacter() {
-    if (hasNext) {
-      currentIndex++;
-      notifyListeners();
+  // ================= DRAW METHODS =================
+
+  void addPoint(Offset point) {
+    points.add(point);
+    notifyListeners();
+  }
+
+  void endStroke() {
+    points.add(null);
+    notifyListeners();
+  }
+
+  void clearCanvas() {
+    points.clear();
+    notifyListeners();
+  }
+
+  void undo() {
+    if (points.isEmpty) return;
+
+    // Remove trailing nulls
+    while (points.isNotEmpty && points.last == null) {
+      points.removeLast();
     }
+
+    // Remove last stroke
+    while (points.isNotEmpty && points.last != null) {
+      points.removeLast();
+    }
+
+    // Remove separator if present
+    if (points.isNotEmpty && points.last == null) {
+      points.removeLast();
+    }
+
+    notifyListeners();
+  }
+
+  // ================= NAVIGATION =================
+
+  void nextCharacter() {
+    if (!hasNext) return;
+
+    currentIndex++;
+    clearCanvas();
+    notifyListeners();
   }
 
   void previousCharacter() {
-    if (hasPrevious) {
-      currentIndex--;
-      notifyListeners();
-    }
+    if (!hasPrevious) return;
+
+    currentIndex--;
+    clearCanvas();
+    notifyListeners();
   }
 }

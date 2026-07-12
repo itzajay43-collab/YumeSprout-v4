@@ -20,51 +20,160 @@ class CharacterCard extends StatelessWidget {
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
         color: AppColors.card,
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(28),
         boxShadow: [
           AppShadows.soft,
         ],
       ),
       child: Column(
         children: [
-          // Character
+          // ================= TOP =================
+
+          Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 14,
+                  vertical: 8,
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.amber.withOpacity(.15),
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                child: Row(
+                  children: [
+                    const Icon(
+                      Icons.star_rounded,
+                      color: Colors.amber,
+                      size: 18,
+                    ),
+                    const SizedBox(width: 6),
+                    Text(
+                      "+${character.xp} XP",
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              const Spacer(),
+
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 6,
+                ),
+                decoration: BoxDecoration(
+                  color: AppColors.primary.withOpacity(.10),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: const Text(
+                  "JLPT N5",
+                  style: TextStyle(
+                    color: AppColors.primary,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
+          ),
+
+          const SizedBox(height: 28),
+
+          // ================= CHARACTER =================
+
           Text(
             character.character,
             style: const TextStyle(
-              fontSize: 96,
+              fontSize: 110,
               fontWeight: FontWeight.bold,
               color: AppColors.primary,
+              height: 1,
             ),
           ),
 
           const SizedBox(height: 12),
 
-          // Romaji
           Text(
             character.romaji.toUpperCase(),
-            style: AppTextStyles.heading,
+            style: AppTextStyles.heading.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
           ),
 
-          const SizedBox(height: 8),
+          const SizedBox(height: 6),
 
-          // Meaning
           Text(
-            "Meaning: ${character.meaning}",
+            character.meaning,
             style: AppTextStyles.subtitle,
           ),
 
-          const SizedBox(height: 24),
+          const SizedBox(height: 28),
+
+          // ================= INFO =================
 
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              _InfoChip(
-                icon: Icons.edit_rounded,
-                label: "${character.strokeCount} Strokes",
+              Expanded(
+                child: _InfoCard(
+                  icon: Icons.edit_rounded,
+                  title: "Strokes",
+                  value: "${character.strokeCount}",
+                ),
               ),
-              _InfoChip(
-                icon: Icons.star_rounded,
-                label: "+${character.xp} XP",
+
+              const SizedBox(width: 12),
+
+              Expanded(
+                child: _InfoCard(
+                  icon: Icons.school_rounded,
+                  title: "Level",
+                  value: "Beginner",
+                ),
+              ),
+            ],
+          ),
+
+          const SizedBox(height: 22),
+
+          // ================= ACTIONS =================
+
+          Row(
+            children: [
+              Expanded(
+                child: OutlinedButton.icon(
+                  onPressed: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text(
+                          "Japanese audio coming soon 🔊",
+                        ),
+                      ),
+                    );
+                  },
+                  icon: const Icon(Icons.volume_up_rounded),
+                  label: const Text("Listen"),
+                ),
+              ),
+
+              const SizedBox(width: 12),
+
+              Expanded(
+                child: FilledButton.icon(
+                  onPressed: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text(
+                          "Stroke animation coming soon ✍️",
+                        ),
+                      ),
+                    );
+                  },
+                  icon: const Icon(Icons.play_arrow_rounded),
+                  label: const Text("Stroke"),
+                ),
               ),
             ],
           ),
@@ -74,37 +183,50 @@ class CharacterCard extends StatelessWidget {
   }
 }
 
-class _InfoChip extends StatelessWidget {
+class _InfoCard extends StatelessWidget {
   final IconData icon;
-  final String label;
+  final String title;
+  final String value;
 
-  const _InfoChip({
+  const _InfoCard({
     required this.icon,
-    required this.label,
+    required this.title,
+    required this.value,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 14,
-        vertical: 10,
-      ),
+      padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
         color: AppColors.progressBackground,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(18),
       ),
-      child: Row(
+      child: Column(
         children: [
           Icon(
             icon,
             color: AppColors.primary,
-            size: 18,
           ),
-          const SizedBox(width: 6),
+
+          const SizedBox(height: 8),
+
           Text(
-            label,
-            style: AppTextStyles.body,
+            title,
+            style: const TextStyle(
+              fontSize: 12,
+              color: Colors.grey,
+            ),
+          ),
+
+          const SizedBox(height: 4),
+
+          Text(
+            value,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+            ),
           ),
         ],
       ),
