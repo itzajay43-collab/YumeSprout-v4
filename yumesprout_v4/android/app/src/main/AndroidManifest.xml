@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="yumesprout_v4"
+        android:label="YumeSprout"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

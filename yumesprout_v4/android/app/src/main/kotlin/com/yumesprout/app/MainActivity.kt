@@ -1,4 +1,4 @@
-package com.example.yumesprout_v4
+package com.yumesprout.app
 
 import io.flutter.embedding.android.FlutterActivity
 
