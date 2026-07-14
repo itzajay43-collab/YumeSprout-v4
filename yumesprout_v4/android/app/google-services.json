@@ -12,7 +12,20 @@
           "package_name": "com.yumesprout.app"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "440087069541-8pfpp8qhcldnm9oepbd6rbkdrsotpak2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yumesprout.app",
+            "certificate_hash": "3b8af6edf8b758579ce0dea3747fbad125e08180"
+          }
+        },
+        {
+          "client_id": "440087069541-s6i6liespao6fua3u1lgajha3g1iqhku.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAGiHAsb8Xjiyzj9r8LFJ-TnWGDk1m_k8A"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "440087069541-s6i6liespao6fua3u1lgajha3g1iqhku.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "440087069541-4prpghmg840lahll11liktt7rcroo9db.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.yumesproutV4"
+              }
+            }
+          ]
         }
       }
     }
