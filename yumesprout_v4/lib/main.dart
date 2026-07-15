@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'firebase_options.dart';
 
 import 'core/theme/app_theme.dart';
+import 'features/splash/screens/splash_screen.dart';
 import 'features/auth/screens/login_screen.dart';
 
 Future<void> main() async {
@@ -25,7 +26,7 @@ class YumeSproutApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'YumeSprout',
       theme: AppTheme.light,
-      home: const LoginScreen(),
+      home: const SplashScreen(),
     );
   }
 }
