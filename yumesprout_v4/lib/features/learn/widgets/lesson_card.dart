@@ -20,7 +20,7 @@ class LessonCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Opacity(
-      opacity: lesson.isLocked ? 0.6 : 1,
+      opacity: lesson.isLocked ? .55 : 1,
       child: Material(
         color: Colors.transparent,
         child: InkWell(
@@ -32,26 +32,29 @@ class LessonCard extends StatelessWidget {
               color: AppColors.card,
               borderRadius: BorderRadius.circular(22),
               boxShadow: [
-                AppShadows.soft,
-              ],
+  AppShadows.soft,
+],
             ),
             child: Row(
               children: [
                 // Japanese Character
-                Container(
-                  width: 70,
-                  height: 70,
-                  decoration: BoxDecoration(
-                    color: AppColors.progressBackground,
-                    borderRadius: BorderRadius.circular(18),
-                  ),
-                  child: Center(
-                    child: Text(
-                      lesson.japanese,
-                      style: const TextStyle(
-                        fontSize: 34,
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.primary,
+                Hero(
+                  tag: lesson.id,
+                  child: Container(
+                    width: 70,
+                    height: 70,
+                    decoration: BoxDecoration(
+                      color: AppColors.progressBackground,
+                      borderRadius: BorderRadius.circular(18),
+                    ),
+                    child: Center(
+                      child: Text(
+                        lesson.japanese,
+                        style: const TextStyle(
+                          fontSize: 34,
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.primary,
+                        ),
                       ),
                     ),
                   ),
@@ -59,7 +62,6 @@ class LessonCard extends StatelessWidget {
 
                 const SizedBox(width: 16),
 
-                // Lesson Info
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -82,15 +84,27 @@ class LessonCard extends StatelessWidget {
 
                       Row(
                         children: [
+                          const Icon(
+                            Icons.star_rounded,
+                            color: Colors.amber,
+                            size: 16,
+                          ),
+                          const SizedBox(width: 4),
                           Text(
-                            "⭐ ${lesson.xp} XP",
+                            "${lesson.xp} XP",
                             style: AppTextStyles.caption,
                           ),
 
-                          const SizedBox(width: 16),
+                          const SizedBox(width: 18),
 
+                          const Icon(
+                            Icons.schedule_rounded,
+                            size: 16,
+                            color: Colors.grey,
+                          ),
+                          const SizedBox(width: 4),
                           Text(
-                            "⏱ ${lesson.duration} min",
+                            "${lesson.duration} min",
                             style: AppTextStyles.caption,
                           ),
                         ],
@@ -107,16 +121,26 @@ class LessonCard extends StatelessWidget {
 
                 const SizedBox(width: 12),
 
-                Icon(
-                  lesson.isLocked
-                      ? Icons.lock_rounded
+                AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 300),
+                  child: lesson.isLocked
+                      ? const Icon(
+                          Icons.lock_rounded,
+                          key: ValueKey("lock"),
+                          color: Colors.grey,
+                        )
                       : lesson.isCompleted
-                          ? Icons.check_circle
-                          : Icons.arrow_forward_ios_rounded,
-                  color: lesson.isCompleted
-                      ? Colors.green
-                      : AppColors.primary,
-                  size: 20,
+                          ? const Icon(
+                              Icons.check_circle,
+                              key: ValueKey("done"),
+                              color: Colors.green,
+                            )
+                          : const Icon(
+                              Icons.arrow_forward_ios_rounded,
+                              key: ValueKey("next"),
+                              color: AppColors.primary,
+                              size: 20,
+                            ),
                 ),
               ],
             ),

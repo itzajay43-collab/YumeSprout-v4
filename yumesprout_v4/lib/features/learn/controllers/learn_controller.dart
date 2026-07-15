@@ -15,6 +15,49 @@ class LearnController extends ChangeNotifier {
       progress: 0.30,
       isLocked: false,
       isCompleted: false,
+
+      characters: [
+        CharacterItem(
+          character: "あ",
+          romaji: "a",
+          pronunciation: "a",
+          example: "あさ",
+          meaning: "Morning",
+          memoryTip: "Looks like an apple 🍎",
+        ),
+        CharacterItem(
+          character: "い",
+          romaji: "i",
+          pronunciation: "ee",
+          example: "いぬ",
+          meaning: "Dog",
+          memoryTip: "Looks like two standing people.",
+        ),
+        CharacterItem(
+          character: "う",
+          romaji: "u",
+          pronunciation: "oo",
+          example: "うみ",
+          meaning: "Sea",
+          memoryTip: "Imagine a smiling face.",
+        ),
+        CharacterItem(
+          character: "え",
+          romaji: "e",
+          pronunciation: "eh",
+          example: "えき",
+          meaning: "Station",
+          memoryTip: "Looks like someone exercising.",
+        ),
+        CharacterItem(
+          character: "お",
+          romaji: "o",
+          pronunciation: "oh",
+          example: "おちゃ",
+          meaning: "Tea",
+          memoryTip: "Imagine someone saying 'Oh!'",
+        ),
+      ],
     ),
 
     LessonModel(

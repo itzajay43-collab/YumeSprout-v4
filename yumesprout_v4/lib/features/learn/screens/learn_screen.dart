@@ -5,6 +5,8 @@ import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_spacing.dart';
 
 import '../controllers/learn_controller.dart';
+import '../screens/lesson_detail_screen.dart';
+
 import '../widgets/continue_learning_banner.dart';
 import '../widgets/jlpt_tabs.dart';
 import '../widgets/lesson_card.dart';
@@ -41,14 +43,12 @@ class _LearnViewState extends State<_LearnView> {
 
     return Scaffold(
       backgroundColor: AppColors.background,
-
       appBar: AppBar(
         backgroundColor: AppColors.background,
         elevation: 0,
         title: const Text("Learn Japanese"),
         centerTitle: false,
       ),
-
       body: ListView(
         padding: const EdgeInsets.all(AppSpacing.md),
         children: [
@@ -69,11 +69,20 @@ class _LearnViewState extends State<_LearnView> {
 
           ...lessons.map(
             (lesson) => Padding(
-              padding: const EdgeInsets.only(bottom: AppSpacing.md),
+              padding: const EdgeInsets.only(
+                bottom: AppSpacing.md,
+              ),
               child: LessonCard(
                 lesson: lesson,
                 onTap: () {
-                  // TODO: Open lesson
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => LessonDetailScreen(
+                        lesson: lesson,
+                      ),
+                    ),
+                  );
                 },
               ),
             ),
