@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../progress/controllers/progress_controller.dart';
 import '../models/lesson_model.dart';
 
 class LessonDetailScreen extends StatefulWidget {
@@ -39,13 +41,11 @@ class _LessonDetailScreenState
         title: Text(widget.lesson.title),
         centerTitle: true,
       ),
-
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(24),
           child: Column(
             children: [
-
               LinearProgressIndicator(
                 value: (currentIndex + 1) /
                     characters.length,
@@ -90,8 +90,7 @@ class _LessonDetailScreenState
 
               Card(
                 child: Padding(
-                  padding:
-                      const EdgeInsets.all(18),
+                  padding: const EdgeInsets.all(18),
                   child: Column(
                     children: [
                       Text(
@@ -119,19 +118,20 @@ class _LessonDetailScreenState
               const SizedBox(height: 20),
 
               Card(
-                color:
-                    Colors.orange.shade50,
+                color: Colors.orange.shade50,
                 child: Padding(
-                  padding:
-                      const EdgeInsets.all(18),
+                  padding: const EdgeInsets.all(18),
                   child: Row(
                     children: [
                       const Text(
                         "💡",
-                        style:
-                            TextStyle(fontSize: 28),
+                        style: TextStyle(
+                          fontSize: 28,
+                        ),
                       ),
+
                       const SizedBox(width: 12),
+
                       Expanded(
                         child: Text(
                           item.memoryTip,
@@ -146,19 +146,18 @@ class _LessonDetailScreenState
 
               Row(
                 children: [
-
                   Expanded(
                     child: OutlinedButton(
-                      onPressed:
-                          currentIndex == 0
-                              ? null
-                              : () {
-                                  setState(() {
-                                    currentIndex--;
-                                  });
-                                },
-                      child:
-                          const Text("Previous"),
+                      onPressed: currentIndex == 0
+                          ? null
+                          : () {
+                              setState(() {
+                                currentIndex--;
+                              });
+                            },
+                      child: const Text(
+                        "Previous",
+                      ),
                     ),
                   ),
 
@@ -166,14 +165,22 @@ class _LessonDetailScreenState
 
                   Expanded(
                     child: FilledButton(
-                      onPressed: () {
-
+                      onPressed: () async {
                         if (currentIndex ==
-                            characters.length -
-                                1) {
+                            characters.length - 1) {
 
-                          ScaffoldMessenger.of(
-                                  context)
+                          final progressController =
+                              context.read<
+                                  ProgressController>();
+
+                          await progressController
+                              .completeLesson();
+
+                          if (!context.mounted) {
+                            return;
+                          }
+
+                          ScaffoldMessenger.of(context)
                               .showSnackBar(
                             SnackBar(
                               content: Text(
@@ -182,9 +189,7 @@ class _LessonDetailScreenState
                             ),
                           );
 
-                          Navigator.pop(
-                              context);
-
+                          Navigator.pop(context);
                           return;
                         }
 
@@ -194,8 +199,7 @@ class _LessonDetailScreenState
                       },
                       child: Text(
                         currentIndex ==
-                                characters.length -
-                                    1
+                                characters.length - 1
                             ? "Finish"
                             : "Next",
                       ),

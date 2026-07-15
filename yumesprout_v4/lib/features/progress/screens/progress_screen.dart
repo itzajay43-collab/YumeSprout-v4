@@ -6,23 +6,20 @@ import '../../../core/theme/app_spacing.dart';
 
 import '../controllers/progress_controller.dart';
 
-import '../widgets/xp_card.dart';
-import '../widgets/streak_card.dart';
-import '../widgets/level_card.dart';
-import '../widgets/weekly_goal_card.dart';
-import '../widgets/learning_stats_card.dart';
 import '../widgets/activity_calendar.dart';
 import '../widgets/achievement_card.dart';
+import '../widgets/learning_stats_card.dart';
+import '../widgets/level_card.dart';
+import '../widgets/streak_card.dart';
+import '../widgets/weekly_goal_card.dart';
+import '../widgets/xp_card.dart';
 
 class ProgressScreen extends StatelessWidget {
   const ProgressScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => ProgressController(),
-      child: const _ProgressView(),
-    );
+    return const _ProgressView();
   }
 }
 
@@ -35,7 +32,6 @@ class _ProgressView extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: AppColors.background,
-
       appBar: AppBar(
         backgroundColor: AppColors.background,
         elevation: 0,
@@ -48,44 +44,54 @@ class _ProgressView extends StatelessWidget {
           ),
         ),
       ),
-
       body: SafeArea(
         child: ListView(
           padding: const EdgeInsets.all(AppSpacing.md),
           children: [
-
             // XP
-            XpCard(progress: controller.progress),
+            XpCard(
+              progress: controller.progress,
+            ),
 
             const SizedBox(height: AppSpacing.lg),
 
             // Streak
-            StreakCard(progress: controller.progress),
+            StreakCard(
+              progress: controller.progress,
+            ),
 
             const SizedBox(height: AppSpacing.lg),
 
             // Level
-            LevelCard(progress: controller.progress),
+            LevelCard(
+              progress: controller.progress,
+            ),
 
             const SizedBox(height: AppSpacing.lg),
 
             // Weekly Goal
-            WeeklyGoalCard(progress: controller.progress),
+            WeeklyGoalCard(
+              progress: controller.progress,
+            ),
 
             const SizedBox(height: AppSpacing.lg),
 
-            // Learning Progress
-            LearningStatsCard(progress: controller.progress),
+            // Learning Stats
+            LearningStatsCard(
+              progress: controller.progress,
+            ),
 
             const SizedBox(height: AppSpacing.lg),
 
-            // Activity
-            ActivityCalendar(progress: controller.progress),
+            // Activity Calendar
+            ActivityCalendar(
+              progress: controller.progress,
+            ),
 
             const SizedBox(height: AppSpacing.lg),
 
             // Achievements
-            AchievementCard(),
+            const AchievementCard(),
 
             const SizedBox(height: 40),
           ],
