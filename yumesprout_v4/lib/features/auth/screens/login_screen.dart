@@ -37,7 +37,7 @@ class _LoginView extends StatelessWidget {
               children: [
                 const SizedBox(height: 20),
 
-                // Logo Card
+                // Logo
                 Container(
                   width: 120,
                   height: 120,
@@ -46,7 +46,7 @@ class _LoginView extends StatelessWidget {
                     borderRadius: BorderRadius.circular(28),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.pink.withOpacity(0.18),
+                        color: Colors.pinkAccent.withOpacity(0.18),
                         blurRadius: 30,
                         offset: const Offset(0, 12),
                       ),
@@ -95,7 +95,7 @@ class _LoginView extends StatelessWidget {
 
                 const SizedBox(height: 45),
 
-                // Google Button
+                // Google Login
                 GoogleSignInButton(
                   isLoading: controller.isLoading,
                   onPressed: () async {
@@ -104,12 +104,11 @@ class _LoginView extends StatelessWidget {
                     if (!context.mounted) return;
 
                     if (controller.isLoggedIn) {
-                      Navigator.pushReplacement(
-                        context,
+                      Navigator.of(context).pushAndRemoveUntil(
                         MaterialPageRoute(
-                          builder: (_) =>
-                              const MainNavigation(),
+                          builder: (_) => const MainNavigation(),
                         ),
+                        (route) => false,
                       );
                     } else if (controller.error != null) {
                       ScaffoldMessenger.of(context).showSnackBar(
@@ -117,12 +116,9 @@ class _LoginView extends StatelessWidget {
                           backgroundColor: Colors.red,
                           behavior: SnackBarBehavior.floating,
                           shape: RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.circular(12),
+                            borderRadius: BorderRadius.circular(12),
                           ),
-                          content: Text(
-                            controller.error!,
-                          ),
+                          content: Text(controller.error!),
                         ),
                       );
                     }
@@ -137,12 +133,11 @@ class _LoginView extends StatelessWidget {
                   height: 56,
                   child: OutlinedButton(
                     onPressed: () {
-                      Navigator.pushReplacement(
-                        context,
+                      Navigator.of(context).pushAndRemoveUntil(
                         MaterialPageRoute(
-                          builder: (_) =>
-                              const MainNavigation(),
+                          builder: (_) => const MainNavigation(),
                         ),
+                        (route) => false,
                       );
                     },
                     style: OutlinedButton.styleFrom(
@@ -150,8 +145,7 @@ class _LoginView extends StatelessWidget {
                         color: Color(0xFFFFB6C1),
                       ),
                       shape: RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.circular(16),
+                        borderRadius: BorderRadius.circular(16),
                       ),
                     ),
                     child: const Text(

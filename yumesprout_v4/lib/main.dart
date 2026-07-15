@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 
 import 'firebase_options.dart';
 
-import 'core/navigation/main_navigation.dart';
 import 'core/theme/app_theme.dart';
+import 'features/auth/screens/login_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,7 +25,7 @@ class YumeSproutApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'YumeSprout',
       theme: AppTheme.light,
-      home: const MainNavigation(),
+      home: const LoginScreen(),
     );
   }
 }

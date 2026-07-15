@@ -28,27 +28,7 @@ class AuthController extends ChangeNotifier {
     try {
       _clearError();
 
-      final user = await _authService.signInWithGoogle();
-
-      if (user != null) {
-        _user = user;
-      }
-    } catch (e) {
-      _error = _formatError(e);
-    } finally {
-      _setLoading(false);
-    }
-  }
-
-  Future<void> signOut() async {
-    if (_isLoading) return;
-
-    _setLoading(true);
-
-    try {
-      await _authService.signOut();
-      _user = null;
-      _clearError();
+      _user = await _authService.signInWithGoogle();
     } catch (e) {
       _error = _formatError(e);
     } finally {
@@ -57,8 +37,25 @@ class AuthController extends ChangeNotifier {
   }
 
   Future<void> refreshUser() async {
-    _user = await _authService.getCurrentUser();
-    notifyListeners();
+    try {
+      _user = await _authService.getCurrentUser();
+      notifyListeners();
+    } catch (e) {
+      _error = _formatError(e);
+      notifyListeners();
+    }
+  }
+
+  Future<void> signOut() async {
+    try {
+      await _authService.signOut();
+      _user = null;
+      _clearError();
+    } catch (e) {
+      _error = _formatError(e);
+    } finally {
+      notifyListeners();
+    }
   }
 
   void clearError() {
@@ -72,7 +69,6 @@ class AuthController extends ChangeNotifier {
 
   void _clearError() {
     _error = null;
-    notifyListeners();
   }
 
   String _formatError(Object error) {
@@ -84,10 +80,6 @@ class AuthController extends ChangeNotifier {
 
     if (text.contains('cancel')) {
       return 'Google sign-in cancelled.';
-    }
-
-    if (text.contains('popup_closed')) {
-      return 'Sign-in cancelled.';
     }
 
     return text.replaceFirst('Exception: ', '');
